@@ -1,0 +1,101 @@
+{
+  "model": "Random Forest / rf_model_r5 (n_estimators=300)",
+  "seleksi_fitur": "Grey Wolf Optimizer (GWO)",
+  "n_fitur": 8,
+  "fitur": [
+    "area_mean",
+    "compactness_mean",
+    "radius_se",
+    "perimeter_se",
+    "perimeter_worst",
+    "smoothness_worst",
+    "concavity_worst",
+    "fractal_dimension_worst"
+  ],
+  "sumber_split": "train_test_split(test_size=0.2, random_state=42) - identik notebook",
+  "n_train": 455,
+  "n_test": 114,
+  "n_total": 569,
+  "n_valid_cv": 568,
+  "accuracy": 0.9912280701754386,
+  "precision": 0.9772727272727273,
+  "recall": 1.0,
+  "f1": 0.9885057471264368,
+  "roc_auc": 1.0,
+  "cv_mean": 0.9507205513784461,
+  "cv_std": 0.030240528830068624,
+  "confusion_matrix": [
+    [
+      70,
+      1
+    ],
+    [
+      0,
+      43
+    ]
+  ],
+  "feature_importance": {
+    "area_mean": 0.19434155225444316,
+    "compactness_mean": 0.08242066252984079,
+    "radius_se": 0.10087672866565414,
+    "perimeter_se": 0.07992398460854733,
+    "perimeter_worst": 0.2920594444329262,
+    "smoothness_worst": 0.06559311775471545,
+    "concavity_worst": 0.15022871390361683,
+    "fractal_dimension_worst": 0.03455579585025609
+  },
+  "feature_ranges": {
+    "area_mean": {
+      "min": 143.5,
+      "max": 2501.0,
+      "mean": 654.8891036906855,
+      "contoh": 1001.0
+    },
+    "compactness_mean": {
+      "min": 0.01938,
+      "max": 0.3454,
+      "mean": 0.10434098418277679,
+      "contoh": 0.2776
+    },
+    "radius_se": {
+      "min": 0.1115,
+      "max": 2.873,
+      "mean": 0.40517205623901575,
+      "contoh": 1.095
+    },
+    "perimeter_se": {
+      "min": 0.757,
+      "max": 21.98,
+      "mean": 2.8660592267135327,
+      "contoh": 8.589
+    },
+    "perimeter_worst": {
+      "min": 50.41,
+      "max": 251.2,
+      "mean": 107.26121265377857,
+      "contoh": 184.6
+    },
+    "smoothness_worst": {
+      "min": 0.07117,
+      "max": 0.2226,
+      "mean": 0.13236859402460457,
+      "contoh": 0.1622
+    },
+    "concavity_worst": {
+      "min": 0.0,
+      "max": 1.252,
+      "mean": 0.27218848330404216,
+      "contoh": 0.7119
+    },
+    "fractal_dimension_worst": {
+      "min": 0.05504,
+      "max": 0.2075,
+      "mean": 0.0839458172231986,
+      "contoh": 0.1189
+    }
+  },
+  "label_map": {
+    "0": "Benign (Jinak)",
+    "1": "Malignant (Ganas)"
+  }
+}

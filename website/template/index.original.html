@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediScan AI - Diagnostic Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f2f4f6",
+                        "outline-variant": "#c3c6d6",
+                        "surface-container": "#eceef0",
+                        "surface-tint": "#0c56d0",
+                        "on-background": "#191c1e",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#d3e4fe",
+                        "background": "#f7f9fb",
+                        "on-tertiary-fixed": "#001e2f",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-tertiary-container": "#a7d9ff",
+                        "surface-variant": "#e0e3e5",
+                        "on-surface-variant": "#434654",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "tertiary": "#004869",
+                        "primary-fixed": "#dae2ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "primary-container": "#0052cc",
+                        "on-surface": "#191c1e",
+                        "on-primary-container": "#c4d2ff",
+                        "outline": "#737685",
+                        "inverse-primary": "#b2c5ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#00618b",
+                        "primary": "#003d9b",
+                        "secondary": "#505f76",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "surface-container-high": "#e6e8ea",
+                        "on-secondary-container": "#54647a",
+                        "on-error": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "secondary-container": "#d0e1fb",
+                        "on-primary-fixed": "#001848"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Manrope"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Hide scrollbar for clean UI but keep functionality */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e0e3e5;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c3c6d6;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="bg-surface-bright dark:bg-surface-container-low h-screen w-64 left-0 sticky bg-surface-container-low dark:bg-surface-dim flat no shadows flex flex-col h-full py-8 px-4 gap-4 hidden md:flex border-r border-outline-variant/30 z-20">
+<!-- Header / Profile -->
+<div class="flex items-center gap-3 mb-8 px-2">
+<img alt="Doctor Profile" class="w-12 h-12 rounded-full object-cover border border-outline-variant/50" data-alt="A professional headshot of a mature female oncologist wearing a crisp white lab coat over a light blue dress shirt. The background is a softly blurred clinical setting with cool, balanced lighting, evoking a sense of expertise and trustworthiness in a modern medical environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDME9cSk9EImQb0y5QFH8sIO0y64DKesbbez-szp_6OfdXb1L1NAqw2TvQ2vzq_r5SsKEyF1aSnxIFgDyqp9Z_M5looouZgNGCjQh8_rB_zBrzpAMOP0hxUiwUMtC1P9RJzA4zM7uskZxWrV2spxxt4aS5txBmc0T3dsQodFFKtnXyXQwCqrAWjMxI2XXKJUfnf841ihukx75AwfVmqJ0AcYdNRmK3mFcyDeHhNcfLmIvNNmHAt8EMT"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Dr. Richardson</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Oncology Dept.</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="bg-primary-container text-on-primary font-label-md text-label-md rounded-full py-3 px-6 w-full flex justify-center items-center gap-2 hover:opacity-90 transition-opacity mb-4 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Analysis
+        </button>
+<!-- Main Navigation Tabs -->
+<ul class="flex flex-col gap-2 flex-grow">
+<li>
+<!-- Active State for Diagnostics -->
+<a class="bg-secondary-container text-on-secondary-container dark:bg-secondary dark:text-on-secondary rounded-full px-4 py-3 flex items-center gap-3 font-label-md text-label-md transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined fill">biotech</span>
+                    Diagnostics
+                </a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container transition-all flex items-center gap-3 rounded-full font-label-md text-label-md active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">history</span>
+                    Patient History
+                </a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container transition-all flex items-center gap-3 rounded-full font-label-md text-label-md active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container transition-all flex items-center gap-3 rounded-full font-label-md text-label-md active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">library_books</span>
+                    Medical Resources
+                </a>
+</li>
+</ul>
+<!-- Footer Navigation Tabs -->
+<div class="mt-auto pt-4 border-t border-outline-variant/30">
+<ul class="flex flex-col gap-1">
+<li>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container transition-all flex items-center gap-3 rounded-full font-label-md text-label-md active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                        Support
+                    </a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container transition-all flex items-center gap-3 rounded-full font-label-md text-label-md active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+                        Legal
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 bg-background relative overflow-y-auto">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim w-full top-0 sticky border-b border-outline-variant dark:border-outline flat no shadows z-10">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto md:px-8">
+<!-- Brand Logo (Mobile visible, Desktop hidden as it's implicit in the app, but kept per instructions) -->
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed flex items-center gap-2">
+<span class="material-symbols-outlined text-[28px] text-primary">health_and_safety</span>
+                    MediScan AI
+                </div>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80 transition-opacity p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80 transition-opacity p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-4 md:p-gutter max-w-[1200px] mx-auto w-full flex flex-col gap-6 lg:gap-8 pb-20">
+<!-- Page Header -->
+<div class="flex flex-col gap-2">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">AI Diagnostic Analysis</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Enter clinical parameters below for malignancy prediction. All fields are required for accurate analysis.</p>
+</div>
+<!-- Bento Grid Layout for Form and Results -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Input Form Panel -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 shadow-sm">
+<form action="#" class="flex flex-col gap-8" method="POST">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+<!-- Field 1 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="area_mean">
+                                    area_mean
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="area_mean" name="area_mean" placeholder="e.g. 1001.0" step="any" type="number"/>
+</div>
+</div>
+<!-- Field 2 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="compactness_mean">
+                                    compactness_mean
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="compactness_mean" name="compactness_mean" placeholder="e.g. 0.277" step="any" type="number"/>
+</div>
+</div>
+<!-- Field 3 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="radius_se">
+                                    radius_se
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="radius_se" name="radius_se" placeholder="e.g. 1.095" step="any" type="number"/>
+</div>
+</div>
+<!-- Field 4 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="perimeter_se">
+                                    perimeter_se
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="perimeter_se" name="perimeter_se" placeholder="e.g. 8.589" step="any" type="number"/>
+</div>
+</div>
+<!-- Field 5 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="perimeter_worst">
+                                    perimeter_worst
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="perimeter_worst" name="perimeter_worst" placeholder="e.g. 184.6" step="any" type="number"/>
+</div>
+</div>
+<!-- Field 6 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="smoothness_worst">
+                                    smoothness_worst
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="smoothness_worst" name="smoothness_worst" placeholder="e.g. 0.162" step="any" type="number"/>
+</div>
+</div>
+<!-- Field 7 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="concavity_worst">
+                                    concavity_worst
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="concavity_worst" name="concavity_worst" placeholder="e.g. 0.7119" step="any" type="number"/>
+</div>
+</div>
+<!-- Field 8 -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5" for="fractal_dimension_worst">
+                                    fractal_dimension_worst
+                                    <span class="text-error" title="Required">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors shadow-sm outline-none" id="fractal_dimension_worst" name="fractal_dimension_worst" placeholder="e.g. 0.1189" step="any" type="number"/>
+</div>
+</div>
+</div>
+<!-- Submit Button Container -->
+<div class="pt-4 border-t border-surface-variant flex justify-end">
+<button class="bg-primary-container text-on-primary hover:bg-primary transition-colors rounded-lg px-6 py-2.5 font-label-md text-label-md flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2" type="button">
+<span class="material-symbols-outlined text-[20px]">science</span>
+                                Run AI Analysis
+                            </button>
+</div>
+</form>
+</div>
+<!-- Results Placeholder Panel -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-surface-variant rounded-xl h-full min-h-[400px] shadow-sm flex flex-col relative overflow-hidden">
+<div class="px-6 py-4 border-b border-surface-variant flex items-center justify-between bg-surface-bright">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Analysis Results</h3>
+<span class="material-symbols-outlined text-outline-variant text-[20px]">psychiatry</span>
+</div>
+<!-- Empty State Content -->
+<div class="flex-1 flex flex-col items-center justify-center p-8 text-center text-on-surface-variant gap-4 bg-surface-bright/50">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[40px] text-outline">query_stats</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface max-w-[250px]">Waiting for input...</p>
+<p class="font-body-sm text-body-sm text-outline max-w-[300px]">Complete the clinical parameters form and run the analysis to view prediction confidence scores and feature importance.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
